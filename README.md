@@ -1,1 +1,1 @@
-# Smart-Wildlife-Monitoring-System-
+# Smart-Wildlife-Monitoring-System

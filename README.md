@@ -102,6 +102,17 @@ Smart-Wildlife-Monitoring-System/
 
 ---
 
+##🖼️ System Architecture 
+
+<p align="center">
+  <img src="assets/diagram.png" alt="System diagram: Wildlife monitoring flow" width="600">
+  <br/>
+  <em>High-level flow of the ESP32-based Smart Wildlife Monitoring System.</em>
+</p>
+
+
+---
+
 ## 🔮 Future Enhancements
 
 * Add **real camera support** (ESP32-CAM)

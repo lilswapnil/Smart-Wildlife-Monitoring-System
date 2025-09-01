@@ -1,120 +1,103 @@
-# 🦉 Smart Wildlife Monitoring System
+🦉 Smart Wildlife Monitoring System
+📖 Overview
 
-## 📖 Overview
+The Smart Wildlife Monitoring System is an IoT-based solution designed to monitor animal activity using an ESP32 microcontroller and multiple sensors (PIR, ultrasonic, LDR). It intelligently detects motion, estimates animal size, determines activity periods (day/night), and uploads the data to ThingSpeak for visualization and analysis.
 
-The **Smart Wildlife Monitoring System** is an intelligent solution designed to observe, track, and analyze wildlife activity in natural habitats. By combining **IoT sensors, computer vision, and data analytics**, the system enables researchers, conservationists, and forest authorities to monitor biodiversity, prevent poaching, and study animal behavior with minimal human interference.
+This system helps researchers and conservationists track wildlife patterns, prevent poaching, and study animal behavior with minimal human interference.
 
----
+✨ Features
 
-## ✨ Features
+🕵️ Motion Detection using a PIR sensor.
 
-* 🎥 **Real-time Animal Detection** using motion sensors and/or camera traps.
-* 🤖 **AI-powered Classification** of species with machine learning models.
-* ☁️ **Cloud-based Data Storage & Analytics** for long-term monitoring.
-* 📊 **Dashboard Visualization** with charts, alerts, and reporting.
-* 🔔 **Instant Notifications** (email/SMS/IoT alerts) on detected activity.
-* 🔋 **Energy Efficient** – optimized for low power consumption in remote areas.
+📏 Distance Measurement with an ultrasonic sensor.
 
----
+💡 Light Level Analysis using an LDR for day/night detection.
 
-## 🏗️ System Architecture
+🐾 Animal Identification (large, medium, small) with time-of-day activity classification.
 
-1. **Input Layer**: Cameras (CCTV, thermal, IR) & IoT sensors (motion, sound).
-2. **Processing Layer**: Edge devices (Raspberry Pi, Jetson Nano) running ML models.
-3. **Storage Layer**: Local + Cloud database for wildlife activity logs.
-4. **Application Layer**: Web/Mobile dashboard for monitoring & analysis.
+📤 Cloud Integration – sends data to ThingSpeak for visualization.
 
----
+🚨 False Positive Filtering using sensor fusion (distance + light).
 
-## 🚀 Getting Started
+📸 Simulated Camera Trigger for proof-of-concept image capture.
 
-### Prerequisites
-
-* Python 3.9+
-* TensorFlow / PyTorch (for ML models)
-* OpenCV (for image processing)
-* Flask / FastAPI (for backend API)
-* MongoDB / PostgreSQL (for storage)
-
-### Installation
-
-```bash
-# Clone the repository
+🏗️ Hardware Setup
+Component	ESP32 Pin	Description
+PIR Sensor (OUT)	GPIO 13	Detects motion
+Ultrasonic Trigger	GPIO 14	Sends sound pulses
+Ultrasonic Echo	GPIO 12	Receives reflected pulses
+LDR Sensor (Analog)	GPIO 34	Reads light level
+🚀 Getting Started
+1. Clone the Repository
 git clone https://github.com/lilswapnil/Smart-Wildlife-Monitoring-System.git
-
-# Navigate to project folder
 cd Smart-Wildlife-Monitoring-System
 
-# Install dependencies
+2. Flash MicroPython to ESP32
+
+Make sure your ESP32 has MicroPython installed.
+
+esptool.py --chip esp32 erase_flash
+esptool.py --chip esp32 write_flash -z 0x1000 esp32-idf4-20230426-v1.20.0.bin
+
+3. Install Requirements (on your computer)
 pip install -r requirements.txt
-```
 
-### Running the Project
+4. Upload Code to ESP32
+mpremote connect /dev/ttyUSB0 cp main.py :
+mpremote connect /dev/ttyUSB0 run main.py
 
-```bash
-# Start the backend server
-python app.py
+⚙️ Configuration
 
-# Or, for Flask
-flask run
+Create a secrets.py file in your project directory (do not commit it to GitHub):
 
-# Access dashboard in browser
-http://127.0.0.1:5000/
-```
+# secrets.py
+THINGSPEAK_WRITE_KEY = "YOUR_API_KEY"
+SSID = "YOUR_WIFI_SSID"
+PASSWORD = "YOUR_WIFI_PASSWORD"
 
----
 
-## 📊 Usage
+In main.py, import it:
 
-* Deploy system in wildlife zones with cameras/sensors.
-* Monitor animal activity via the dashboard.
-* Export reports for research and conservation purposes.
+from secrets import THINGSPEAK_WRITE_KEY, SSID, PASSWORD
 
----
+📊 Data Sent to ThingSpeak
 
-## 📂 Project Structure
+Field1: Motion detected (0/1)
 
-```
+Field2: Distance (cm)
+
+Field3: Light level (0–4095)
+
+Field4: False positive flag (0 = real, 1 = false)
+
+Field5: Animal type (coded integer)
+
+📂 Project Structure
 Smart-Wildlife-Monitoring-System/
-│── data/                # Sample datasets & logs
-│── models/              # Pre-trained ML models
-│── src/                 # Source code
-│   ├── detection/       # Object detection scripts
-│   ├── backend/         # API & server code
-│   ├── dashboard/       # Web UI
-│── requirements.txt     # Dependencies
-│── app.py               # Main application entry point
+│── main.py              # Main firmware for ESP32
+│── requirements.txt     # Host-side tools
+│── secrets.py           # WiFi + API key (ignored in git)
 │── README.md            # Documentation
-```
 
----
+🔮 Future Enhancements
 
-## 🔮 Future Enhancements
+Add real camera support (ESP32-CAM).
 
-* Drone integration for aerial wildlife monitoring.
-* Improved deep learning models for rare species identification.
-* Predictive analytics for animal migration patterns.
-* Integration with GIS mapping systems.
+Deploy ML models for species recognition.
 
----
+Integrate with mobile app/dashboard for live alerts.
 
-## 🤝 Contributing
+Support LoRaWAN/Edge AI for remote monitoring.
 
-Contributions are welcome! Please fork this repository, create a new branch, and submit a pull request.
+🤝 Contributing
 
----
+Pull requests are welcome. For major changes, please open an issue first to discuss what you’d like to change.
 
-## 📜 License
+📜 License
 
-This project is licensed under the **MIT License**
+This project is licensed under the MIT License
 
----
+👨‍💻 Author
 
-## 👨‍💻 Author
-
-**Swapnil Bhalerao**
-🔗 [GitHub Profile](https://github.com/lilswapnil)
-
----
-
-Would you like me to **make this README more academic (research-paper style)** for a university project, or **more industry-focused (like a startup product)** with a polished demo + deployment section?
+Swapnil Bhalerao
+🔗 GitHub Profile

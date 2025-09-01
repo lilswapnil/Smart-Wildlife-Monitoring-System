@@ -1,6 +1,3 @@
-Here’s a ready-to-use **`README.md`** file for your repository:
-
-````markdown
 # 🦉 Smart Wildlife Monitoring System  
 
 ## 📖 Overview  
@@ -130,10 +127,3 @@ This project is licensed under the **MIT License**
 
 **Swapnil Bhalerao**
 🔗 [GitHub Profile](https://github.com/lilswapnil)
-
-```
-
----
-
-Do you want me to also include a **Markdown diagram/flowchart** (sensors → ESP32 → ThingSpeak → Dashboard) inside the README so the architecture is visually clear?
-```

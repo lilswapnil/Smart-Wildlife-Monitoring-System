@@ -102,7 +102,7 @@ Smart-Wildlife-Monitoring-System/
 
 ---
 
-##🖼️ System Architecture 
+## 🖼️ System Architecture 
 
 <p align="center">
   <img src="assets/diagram.png" alt="System diagram: Wildlife monitoring flow" width="600">
